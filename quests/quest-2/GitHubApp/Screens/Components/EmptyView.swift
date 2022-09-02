@@ -5,7 +5,6 @@
 //  Created by Rodrigo Borges on 01/08/22.
 //
 
-import Foundation
 import UIKit
 
 final class EmptyView: UIView {
@@ -40,13 +39,21 @@ final class EmptyView: UIView {
         return label
     }()
     
+    private lazy var searchButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle("Search", for: .normal)
+        return button
+    }()
+    
     init() {
         
         super.init(frame: .zero)
 
         self.configureSubviews()
         self.configureConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +67,8 @@ final class EmptyView: UIView {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(subtitleLabel)
         addSubview(stackView)
+        
+        addSubview(searchButton)
     }
     
     private func configureConstraints() {
@@ -69,8 +78,9 @@ final class EmptyView: UIView {
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            searchButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
+            searchButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-        
     }
-    
 }
